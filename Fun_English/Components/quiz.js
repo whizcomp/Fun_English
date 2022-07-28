@@ -14,13 +14,17 @@ const Quiz = ({quiz}) => {
       <Text style={styles.ask}>What word means:</Text>
       <Text style={styles.quiz}>{quiz}</Text>
       
-      {wordArr.map(word=><Box lttr={word} />)}
+      <View style={styles.lettersCover}>{wordArr.map(word=><Box lttr={word} />)}</View>
     </View>
 )};
 const styles = StyleSheet.create({
     ask:{
         paddingTop:"5%",
         color:"#08B92E"
+    },
+    lettersCover:{
+        marginTop:'5%',
+        flexDirection:"row",
     },
     quiz:{
         paddingTop:"10%",
