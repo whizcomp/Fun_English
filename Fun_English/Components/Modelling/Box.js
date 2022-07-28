@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     cover:{
         width:40,
         height:40,
-        
         backgroundColor:"#08B92E",
         justifyContent:"center",
         alignItems:"center",
