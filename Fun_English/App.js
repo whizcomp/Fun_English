@@ -5,7 +5,7 @@ import Text from './MyText';
 
 const App = () => (
     <View style={styles.container}>
-        <Quiz quiz=" To make or become better in quality"/>
+        <Quiz quiz=" To make or become better in quality" word="improve"/>
     </View>
 );
 const styles = StyleSheet.create({

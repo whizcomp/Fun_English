@@ -1,12 +1,14 @@
 import React from 'react';
-import { Text, View,StyleSheet } from 'react-native';
+import { Text, View,StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
-const Box = ({lttr}) => {
+const Box = ({lttr,onPress}) => {
     
     return(
-    <View style={styles.cover}>
-        <Text style={{textTransform:"uppercase",fontWeight:"bold",fontSize:26}}>{lttr}</Text>
-    </View>
+      <TouchableWithoutFeedback onPress={onPress}>
+        <View style={styles.cover}>
+            <Text style={{textTransform:"uppercase",fontWeight:"bold",fontSize:26}}>{lttr}</Text>
+        </View>
+    </TouchableWithoutFeedback>
 )};
 const styles = StyleSheet.create({
     cover:{
