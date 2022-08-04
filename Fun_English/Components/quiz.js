@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View,StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import Text from '../MyText';
 import Box from './Modelling/Box';
-
+import LottieView from 'lottie-react-native';
 const Quiz = ({quiz,word=""}) => {
     useEffect(()=>{
         wordArr.map(letter=>val.push(null));
@@ -18,17 +18,11 @@ const Quiz = ({quiz,word=""}) => {
         wordArr.map(letter=>val.push(null));
         setIns(val)
     }
+    const [waitingPage,setWaitingPage]=useState(false)
     let [index,setIndex]=useState(0)
     const raw="spaomriesemtbav".split("")
     const checkAnswer=()=>{
-        if(JSON.stringify(ins) === JSON.stringify(wordArr)) console.log(ins);
-        console.log('====================================');
-        console.log("the question",wordArr);
-        console.log('====================================');
-        console.log('====================================');
-        console.log("the ans",ins);
-        console.log('====================================');
-        
+       setWaitingPage(true) 
     }
     const addToAnswer=(word)=>{
         
@@ -37,7 +31,10 @@ const Quiz = ({quiz,word=""}) => {
         setIndex(index+1)
         setIns(newValue)
         if(index==wordArr.length-1){
-            checkAnswer()
+            setTimeout(() => {
+                checkAnswer()
+            }, 500);
+            
         }
     }
     const removeFromAnswer=(lttr)=>{
@@ -45,10 +42,12 @@ const Quiz = ({quiz,word=""}) => {
     }
     return(
     <View>
+        
       <Text>Level one</Text>
+      {!waitingPage?<>
       <Text style={styles.ask}>What word means:</Text>
       <Text style={styles.quiz}>{quiz}</Text>
-      {index!==wordArr.length?<>
+      
       <View style={styles.lettersCover}>{ins.map(word=><Box lttr={word} onPress={()=>removeFromAnswer(word)} />)}</View>
       <TouchableWithoutFeedback onPress={reset}>
         <View style={styles.clearView}>
@@ -56,14 +55,22 @@ const Quiz = ({quiz,word=""}) => {
       </TouchableWithoutFeedback>
       <View style={styles.raw}>
       <View style={styles.lettersCover1}>{raw.map(word=><Box onPress={()=>addToAnswer(word)} lttr={word} />)}</View>
-      </View></>:<View>
-        <Text>{ins.toString()}</Text></View>}
+      </View>
+        </>:<View style={styles.containerCheck}>
+            <View style={{paddingBottom:25}}><Text>Seme</Text>
+            </View>
+                <LottieView source={require('./assets/50465-done.json')} style={styles.lottie} />
+        </View>}
     </View>
 )};
 const styles = StyleSheet.create({
     ask:{
         paddingTop:"5%",
         color:"#08B92E"
+    },
+    containerCheck:{
+        justifyContent:"center",
+        alignItems:"center"
     },
     clear:{
         color:"red",
@@ -88,6 +95,13 @@ const styles = StyleSheet.create({
         alignItems:"center",
         justifyContent:"center",
         alignContent:"center"
+    },
+    lottie:{
+        width:200,
+        height:300
+    },
+    motis:{
+        backgroundColor:'red'
     },
     raw:{
         flex:1,
