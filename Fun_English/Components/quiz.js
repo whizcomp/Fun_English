@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { View,StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import Text from '../MyText';
 import Box from './Modelling/Box';
-import LottieView from 'lottie-react-native';
-const Quiz = ({quiz,word=""}) => {
+const Quiz = ({quiz,word="",letters}) => {
     useEffect(()=>{
         wordArr.map(letter=>val.push(null));
         setIns(val)
     },[ins])
     const wordArr=word.split("");
-        //["i","m","p","r","o","v","e"]
         let val=[]
     const [ins,setIns]=useState([])
     const reset=()=>{
@@ -18,11 +16,10 @@ const Quiz = ({quiz,word=""}) => {
         wordArr.map(letter=>val.push(null));
         setIns(val)
     }
-    const [waitingPage,setWaitingPage]=useState(false)
     let [index,setIndex]=useState(0)
-    const raw="spaomriesemtbav".split("")
+    const raw=letters.split("")
     const checkAnswer=()=>{
-       setWaitingPage(true) 
+       console.log('yes')
     }
     const addToAnswer=(word)=>{
         
@@ -44,11 +41,10 @@ const Quiz = ({quiz,word=""}) => {
     <View>
         
       <Text>Level one</Text>
-      {!waitingPage?<>
       <Text style={styles.ask}>What word means:</Text>
       <Text style={styles.quiz}>{quiz}</Text>
       
-      <View style={styles.lettersCover}>{ins.map(word=><Box lttr={word} onPress={()=>removeFromAnswer(word)} />)}</View>
+      <View style={styles.lettersCover}>{ins.map(word=><Box style={styles.box} lttr={word} onPress={()=>removeFromAnswer(word)} />)}</View>
       <TouchableWithoutFeedback onPress={reset}>
         <View style={styles.clearView}>
         <Text style={styles.clear}>X</Text></View>
@@ -56,11 +52,6 @@ const Quiz = ({quiz,word=""}) => {
       <View style={styles.raw}>
       <View style={styles.lettersCover1}>{raw.map(word=><Box onPress={()=>addToAnswer(word)} lttr={word} />)}</View>
       </View>
-        </>:<View style={styles.containerCheck}>
-            <View style={{paddingBottom:25}}><Text>Seme</Text>
-            </View>
-                <LottieView source={require('./assets/50465-done.json')} style={styles.lottie} />
-        </View>}
     </View>
 )};
 const styles = StyleSheet.create({
@@ -68,9 +59,10 @@ const styles = StyleSheet.create({
         paddingTop:"5%",
         color:"#08B92E"
     },
-    containerCheck:{
-        justifyContent:"center",
-        alignItems:"center"
+    box:{
+        width:"auto",
+        minWidth:30,
+        height:35
     },
     clear:{
         color:"red",
@@ -85,8 +77,7 @@ const styles = StyleSheet.create({
         marginTop:'5%',
         flexDirection:"row",
         flexWrap:"nowrap",
-        justifyContent:"space-evenly",
-        alignContent:"center"
+        justifyContent:"center"
     },
     lettersCover1:{
         paddingTop:'55%',
@@ -96,13 +87,8 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignContent:"center"
     },
-    lottie:{
-        width:200,
-        height:300
-    },
-    motis:{
-        backgroundColor:'red'
-    },
+     
+    
     raw:{
         flex:1,
     },
