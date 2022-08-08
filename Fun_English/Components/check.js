@@ -1,20 +1,33 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { Text, View,StyleSheet } from 'react-native';
 import LottieView from 'lottie-react-native'
 import Button from './Modelling/MyButton';
-const Check = () => (
+import { useRoute,useNavigation } from '@react-navigation/native';
+import {IndexContext} from './context/indexContext';
+
+const Check = () => {
+    const [ind,setInd]=useContext(IndexContext)
+   
+    const route = useRoute();
+    const navigation=useNavigation();
+    const { word, quiz} = route.params;
+    const nextQuiz=()=>{
+        let newInd=ind;
+     setInd(newInd++);
+     navigation.navigate("Assemble")
+    }
+return(
     <View style={styles.containerCheck}>
             <View style={{paddingBottom:25}}> 
-             <Text style={styles.word}>improve</Text>
-             <Text style={styles.def}> To make or become better in qualite</Text>
-             
+                <Text style={styles.word}>{word}</Text>
+                <Text style={styles.def}>{quiz}</Text>
             </View>
-                <LottieView source={require('./assets/12821-failed-attempt.json')} style={styles.lottie} autoPlay/>
-                <View style={styles.btnView}> 
-                    <Button onPress={()=>console.log('press me')}/>   
-                </View>
+                <LottieView source={require('./assets/50465-done.json')} style={styles.lottie} autoPlay/>
+            <View style={styles.btnView}> 
+                <Button onPress={nextQuiz}/>   
+            </View>
     </View>
-);
+)};
 const styles = StyleSheet.create({
     btnView:{
         paddingTop:15

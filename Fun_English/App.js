@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
-import { View,StyleSheet} from 'react-native';
+import React,{useState} from 'react';
 import Check from './Components/check';
-import Quiz from './Components/quiz';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Assemble from './Components/Modelling/Assemble';
+import { IndexContext } from './Components/context/indexContext';
 
-const App = () =>{ 
-  const [words,setWords]=useState([{word:"improve",letters:"spaomriesemtbav",def:"To make or become better in quality"},{word:"impecable",letters:"pahaimacceabsle",def:"Having no flaws; perfect"},{word:"perfect",letters:"elpohsaiviaq",def:" large in quantity and expensive or impressive"}])
-  const [wordIndex,setWordIndex]=useState(0)
+const App = () =>{
+  const [ind,setInd]=useState(0);
+  
+  const Stack = createNativeStackNavigator();
   return (
+    <IndexContext.Provider value={[ind,setInd]}>
     <NavigationContainer>
-      <View style={styles.container}>
-    <Quiz quiz={words[2].def} word={words[2].word} letters={words[2].letters}/>
-    </View>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Assemble" component={Assemble} />
+        <Stack.Screen name="Check" component={Check} />
+
+      </Stack.Navigator>
     </NavigationContainer>
+    </IndexContext.Provider>
     )}
-const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    paddingHorizontal:10
-  }
-})
+
 export default App;

@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View,StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import Text from '../MyText';
 import Box from './Modelling/Box';
-const Quiz = ({quiz,word="",letters}) => {
+import { useNavigation } from '@react-navigation/native'
+
+const Quiz = ({quiz,word="",letters,curNumber}) => {
     useEffect(()=>{
         wordArr.map(letter=>val.push(null));
         setIns(val)
     },[ins])
+    
+    const navigation=useNavigation()
     const wordArr=word.split("");
         let val=[]
     const [ins,setIns]=useState([])
@@ -19,7 +23,7 @@ const Quiz = ({quiz,word="",letters}) => {
     let [index,setIndex]=useState(0)
     const raw=letters.split("")
     const checkAnswer=()=>{
-       console.log('yes')
+       navigation.navigate('Check',{word,quiz})
     }
     const addToAnswer=(word)=>{
         
@@ -27,24 +31,21 @@ const Quiz = ({quiz,word="",letters}) => {
         newValue[index]=word;
         setIndex(index+1)
         setIns(newValue)
-        if(index==wordArr.length-1){
+        if(index>=wordArr.length-1){
             setTimeout(() => {
                 checkAnswer()
             }, 500);
             
         }
     }
-    const removeFromAnswer=(lttr)=>{
-        console.log(ins.indexOf(lttr))
-    }
+    
     return(
     <View>
-        
       <Text>Level one</Text>
       <Text style={styles.ask}>What word means:</Text>
       <Text style={styles.quiz}>{quiz}</Text>
       
-      <View style={styles.lettersCover}>{ins.map(word=><Box style={styles.box} lttr={word} onPress={()=>removeFromAnswer(word)} />)}</View>
+      <View style={styles.lettersCover}>{ins.map(word=><Box style={styles.box} lttr={word}  />)}</View>
       <TouchableWithoutFeedback onPress={reset}>
         <View style={styles.clearView}>
         <Text style={styles.clear}>X</Text></View>
