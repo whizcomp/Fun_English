@@ -10,7 +10,7 @@ const App = () =>{
   
   const Stack = createNativeStackNavigator();
   return (
-    <IndexContext.Provider value={[ind,setInd]}>
+    <IndexContext.Provider value={{ind,setInd}}>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Assemble" component={Assemble} />

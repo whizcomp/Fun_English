@@ -4,12 +4,13 @@ import Text from '../MyText';
 import Box from './Modelling/Box';
 import { useNavigation } from '@react-navigation/native'
 
-const Quiz = ({quiz,word="",letters,curNumber}) => {
+const Quiz = ({quiz,word="",letters}) => {
     useEffect(()=>{
+        console.log(word)
+        reset()
         wordArr.map(letter=>val.push(null));
         setIns(val)
-    },[ins])
-    
+    },[word])
     const navigation=useNavigation()
     const wordArr=word.split("");
         let val=[]

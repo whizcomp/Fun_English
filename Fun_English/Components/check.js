@@ -6,14 +6,14 @@ import { useRoute,useNavigation } from '@react-navigation/native';
 import {IndexContext} from './context/indexContext';
 
 const Check = () => {
-    const [ind,setInd]=useContext(IndexContext)
+    const {ind,setInd}=useContext(IndexContext)
    
     const route = useRoute();
     const navigation=useNavigation();
     const { word, quiz} = route.params;
     const nextQuiz=()=>{
-        let newInd=ind;
-     setInd(newInd++);
+         
+     setInd(ind+1);
      navigation.navigate("Assemble")
     }
 return(
