@@ -4,17 +4,24 @@ import LottieView from 'lottie-react-native'
 import Button from './Modelling/MyButton';
 import { useRoute,useNavigation } from '@react-navigation/native';
 import {IndexContext} from './context/indexContext';
+import { LevelContext } from './context/levelContext';
 
 const Check = () => {
     const {ind,setInd}=useContext(IndexContext)
-   
+   const {setCurrentLevel,currentLevel}=useContext(LevelContext)
     const route = useRoute();
     const navigation=useNavigation();
     const { word, quiz} = route.params;
     const nextQuiz=()=>{
          
-     setInd(ind+1);
-     navigation.navigate("Assemble")
+     if(ind==1){
+        setInd(0)
+        setCurrentLevel(currentLevel+1)
+        navigation.navigate("NavPage")
+    }else {
+        setInd(ind+1);
+        navigation.navigate("Assemble")
+    }
     }
 return(
     <View style={styles.containerCheck}>

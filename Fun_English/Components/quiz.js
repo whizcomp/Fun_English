@@ -30,8 +30,7 @@ const Quiz = ({quiz,word="",letters}) => {
           }
         else{
             navigation.navigate('Wrong',{word,quiz,ins}) 
-        }
-        
+        }    
     }
     const addToAnswer=(word)=>{
         if(index>wordArr.length-1)return;
@@ -47,9 +46,9 @@ const Quiz = ({quiz,word="",letters}) => {
       <Text>Level one</Text>
       <Text style={styles.ask}>What word means:</Text>
       <Text style={styles.quiz}>{quiz}</Text>
-      <View style={styles.lettersCover}>{ins.map(word=><Box style={styles.box} lttr={word}  />)}</View>
+      <View style={styles.lettersCover}>{ins.map((word,index)=><Box style={styles.box} lttr={word} key={index} />)}</View>
       <View style={styles.raw}>
-      <View style={styles.lettersCover1}>{raw.map(word=><Box onPress={()=>addToAnswer(word)} lttr={word} />)}</View>
+      <View style={styles.lettersCover1}>{raw.map((word,index)=><Box  key={index}onPress={()=>addToAnswer(word)} lttr={word} />)}</View>
       </View>
       <View style={{paddingBottom:"15%"}}>
       <Button onPress={reset} title="Reset"style={{backgroundColor:"#8B0000"}}/>
