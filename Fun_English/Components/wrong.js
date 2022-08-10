@@ -19,7 +19,7 @@ const Wronged = () =>{
            <View style={styles.containerCheck}>
                     <View style={{flex:1}}>
                         <Text>You answered</Text>
-                        <Text style={styles.wrongAnswer}>{ins.toString()}</Text>
+                        <Text style={styles.wrongAnswer}>{ins.join("")}</Text>
                     </View>
             </View>
             <View style={styles.containerCheck}>
@@ -57,12 +57,14 @@ const styles = StyleSheet.create({
     textAlign:"center",
     fontSize:24+6,
     color:"green",
-    paddingVertical:"5%"
+    paddingVertical:"5%",
+    textTransform:"uppercase"
    },
    wrongAnswer:{
     textAlign:"center",
     fontSize:24,
-    color:"red"
+    color:"red",
+    textTransform:"uppercase"
 }
 })
 export default Wronged;

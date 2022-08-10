@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View,StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { View,StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import Text from '../MyText';
 import Box from './Modelling/Box';
 import { useNavigation } from '@react-navigation/native'
+import Button from './Modelling/MyButton';
 
 const Quiz = ({quiz,word="",letters}) => {
     useEffect(()=>{
@@ -23,18 +24,22 @@ const Quiz = ({quiz,word="",letters}) => {
     let [index,setIndex]=useState(0)
     const raw=letters.split("")
     const checkAnswer=()=>{
-        setTimeout(() => {
-            navigation.navigate('Wrong',{word,quiz,ins})
-        }, 500);
-       
+        const insString=ins.join("");
+        if(insString==word){
+            navigation.navigate('Check',{word,quiz}) 
+          }
+        else{
+            navigation.navigate('Wrong',{word,quiz,ins}) 
+        }
+        
     }
     const addToAnswer=(word)=>{
+        if(index>wordArr.length-1)return;
         let newValue=[...ins]
         newValue[index]=word;
         setIndex(index+1)
         setIns(newValue)
-        if(index==wordArr.length-1){
-            checkAnswer()}
+        
     }
     
     return(
@@ -46,11 +51,10 @@ const Quiz = ({quiz,word="",letters}) => {
       <View style={styles.raw}>
       <View style={styles.lettersCover1}>{raw.map(word=><Box onPress={()=>addToAnswer(word)} lttr={word} />)}</View>
       </View>
-      <View style={{flexDirection:"row",paddingBottom:"15%"}}>
-        <Text>clears</Text>
-        <Text>bookmark</Text>
-        <Text>Next</Text>
+      <View style={{paddingBottom:"15%"}}>
+      <Button onPress={reset} title="Reset"style={{backgroundColor:"#8B0000"}}/>
 
+        <Button onPress={checkAnswer} title="Check answer"/>
       </View>
     </View>
 )};

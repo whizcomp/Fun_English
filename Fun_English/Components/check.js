@@ -24,7 +24,7 @@ return(
             </View>
                 <LottieView source={require('./assets/50465-done.json')} style={styles.lottie} autoPlay/>
             <View style={styles.btnView}> 
-                <Button onPress={nextQuiz}/>   
+                <Button onPress={nextQuiz} title="Next"/>   
             </View>
     </View>
 )};

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, TouchableWithoutFeedback, View,StyleSheet } from 'react-native';
 
-const Button = ({onPress}) => (
+const Button = ({onPress,title="Press Me",style}) => (
     <TouchableWithoutFeedback onPress={onPress}>
-        <View style={styles.container}>
-            <Text style={styles.title}>Press Me</Text>
+        <View style={[styles.container,style]}>
+            <Text style={styles.title}>{title}</Text>
         </View>
     </TouchableWithoutFeedback>
 );
@@ -13,9 +13,10 @@ const styles = StyleSheet.create({
     width:"100%",
     borderRadius:25,
     padding:13,
-    backgroundColor:"green",
+    backgroundColor:"#08B92E",
     justifyContent:"center",
-    alignItems:"center"
+    alignItems:"center",
+    marginVertical:10
    } ,
    title:{
     textTransform:"uppercase",
