@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TouchableWithoutFeedback, View,StyleSheet } from 'react-native';
 
-const Button = ({onPress,title="Press Me",style,disabled}) => (
+const Button = ({onPress,title="Next",style,disabled}) => (
     <TouchableWithoutFeedback onPress={onPress} disabled={disabled}>
         <View style={[styles.container,style]}>
             <Text style={styles.title}>{title}</Text>

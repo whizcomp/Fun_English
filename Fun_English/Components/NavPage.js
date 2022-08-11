@@ -5,9 +5,8 @@ import Button from './Modelling/MyButton';
 import { useNavigation } from '@react-navigation/native';
 
 const NavPage = () =>{
-    
-    const {currentLevel}=useContext(LevelContext)
-    const navigation=useNavigation()
+   const {currentLevel}=useContext(LevelContext)
+   const navigation=useNavigation()
    const levels=[
         {title:"Level One",number:1},
         {title:"Level two",number:2},
@@ -23,7 +22,6 @@ const NavPage = () =>{
     </View>
 )};
 const styles = StyleSheet.create({
-    
     container:{
         flex:1,
         paddingHorizontal:19,

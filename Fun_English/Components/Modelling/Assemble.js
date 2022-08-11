@@ -2,7 +2,6 @@ import React,{useContext, useState}from 'react';
 import {  View,StyleSheet} from 'react-native';
 import {IndexContext }from '../context/indexContext';
 import Quiz from '../quiz';
-import { useRoute } from '@react-navigation/native';
 const Assemble = () => {
   const {ind}=useContext(IndexContext)
     const [words,setWords]=useState([{word:"improve",letters:"spaomriesemtbav",def:"To make or become better in quality"},{word:"impecable",letters:"pahaimacceabsle",def:"Having no flaws; perfect"},{word:"lavish",letters:"elpohsaiviaq",def:" large in quantity and expensive or impressive"}])

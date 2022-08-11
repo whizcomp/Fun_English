@@ -14,7 +14,7 @@ const App = () =>{
   const Stack = createNativeStackNavigator();
   return (
     <IndexContext.Provider value={{ind,setInd}}>
-      <LevelContext.Provider value={{currentLevel,setCurrentLevel}}>
+    <LevelContext.Provider value={{currentLevel,setCurrentLevel}}>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="NavPage" component={NavPage} />
@@ -26,5 +26,4 @@ const App = () =>{
     </LevelContext.Provider>
     </IndexContext.Provider>
     )}
-
 export default App;

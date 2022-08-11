@@ -38,7 +38,7 @@ const Wronged = () =>{
                 </View>
             </View>
             <View style={styles.btnEdit}>
-                <Button onPress={nextQuiz}/>
+                <Button onPress={nextQuiz} title="Next"/>
             </View>
         </View>
     )};
