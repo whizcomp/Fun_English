@@ -50,7 +50,7 @@ const Quiz = ({quiz,word="",letters}) => {
       <View style={styles.raw}>
       <View style={styles.lettersCover1}>{raw.map((word,index)=><Box  key={index}onPress={()=>addToAnswer(word)} lttr={word} />)}</View>
       </View>
-      <View style={{paddingBottom:"15%"}}>
+      <View >
       <Button onPress={reset} title="Reset"style={{backgroundColor:"#8B0000"}}/>
 
         <Button onPress={checkAnswer} title="Check answer"/>

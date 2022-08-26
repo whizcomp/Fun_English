@@ -1,10 +1,20 @@
-import React,{useContext} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React,{useContext, useEffect, useRef} from 'react';
+import { Animated, StyleSheet, View } from 'react-native';
 import { LevelContext } from './context/levelContext';
 import Button from './Modelling/MyButton';
 import { useNavigation } from '@react-navigation/native';
-
 const NavPage = () =>{
+    useEffect(()=>{
+        Animated.timing(fadeAnim,{
+            toValue:1,
+            duration:2000,
+            useNativeDriver:true
+        }).start()
+    })
+    const fadeAnim=useRef(new Animated.Value(0)).current;
+    const fadeIn=()=>{
+        
+    }
    const {currentLevel}=useContext(LevelContext)
    const navigation=useNavigation()
    const levels=[
@@ -17,9 +27,9 @@ const NavPage = () =>{
         navigation.navigate("Assemble",{level})
     }
     return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container,{opacity:fadeAnim}]}>
         {levels.map(level=><Button disabled={level.number>currentLevel?true:false}key={level.number} onPress={()=>setLevel(level)} title={level.title} style={{opacity:level.number>currentLevel?0.3:1}}/>)}
-    </View>
+    </Animated.View>
 )};
 const styles = StyleSheet.create({
     container:{
