@@ -1,13 +1,14 @@
 import React,{useContext, useEffect, useState}from 'react';
 import {  View,StyleSheet,Text} from 'react-native';
 import apiClient from '../api/apisauce';
+import { getAdj } from '../api/localdb';
 import {IndexContext }from '../context/indexContext';
 import Quiz from '../quiz';
 
 const Assemble = () => {
   const getWords= async ()=>{
     try {
-      const{ data}=await apiClient.get()
+      const{ data}=await apiClient.get(getSavedAdj)
       console.log("data",data)
     setWords(data)
     setLoading(false)
@@ -15,7 +16,10 @@ const Assemble = () => {
       setLoading(false)
       setErrors(true)
     }
-    
+  }
+  const getSavedAdj=async()=>{
+    const list= await getAdj()
+    return list.toString();
   }
   useEffect(()=>{
     getWords()

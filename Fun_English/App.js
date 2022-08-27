@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import Check from './Components/check';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -7,11 +7,20 @@ import { IndexContext } from './Components/context/indexContext';
 import Wronged from './Components/wrong';
 import NavPage from './Components/NavPage';
 import { LevelContext } from './Components/context/levelContext';
+import {saveAdj,createTable,getAdj} from './Components/api/localdb';
 
 const App = () =>{
+  useEffect(()=>{
+    createTable()
+    saveAdj("parents")
+    getSavedAdj()
+  },[])
+  
   const [ind,setInd]=useState(0);
+  
   const [currentLevel,setCurrentLevel]=useState(1)
   const Stack = createNativeStackNavigator();
+  
   return (
     <IndexContext.Provider value={{ind,setInd}}>
     <LevelContext.Provider value={{currentLevel,setCurrentLevel}}>
