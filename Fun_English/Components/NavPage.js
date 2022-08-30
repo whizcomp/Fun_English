@@ -21,7 +21,8 @@ const NavPage = () =>{
         {title:"Level One",number:1},
         {title:"Level two",number:2},
         {title:"Level three",number:3},
-        {title:"Level Four",number:4}
+        {title:"Level Four",number:4},
+        {title:"Level Five",number:5}
 ]
     const setLevel=(level)=>{
         navigation.navigate("Assemble",{level})
@@ -35,8 +36,6 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         paddingHorizontal:19,
-        alignItems:"center",
-        justifyContent: 'center',
     },
 })
 export default NavPage;

@@ -7,15 +7,13 @@ import { IndexContext } from './Components/context/indexContext';
 import Wronged from './Components/wrong';
 import NavPage from './Components/NavPage';
 import { LevelContext } from './Components/context/levelContext';
-import {saveAdj,createTable,getAdj} from './Components/api/localdb';
+import {getAdj} from './Components/api/localdb';
 
 const App = () =>{
-  useEffect(()=>{
-    createTable()
-    saveAdj("parents")
-    getSavedAdj()
-  },[])
   
+  const getSavedAdj=async()=>{
+    return await getAdj()
+  }
   const [ind,setInd]=useState(0);
   
   const [currentLevel,setCurrentLevel]=useState(1)

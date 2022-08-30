@@ -2,8 +2,8 @@ import { enablePromise,openDatabase } from "react-native-sqlite-storage";
 
  const db =openDatabase({ name: 'adjectives.db', location: 'default' });
   
-//   enablePromise(true)
-const tableName="adjectives"
+  enablePromise(true)
+const tableName="adj"
   export const createTable = async () => {
     // create table if not exists
     const query = `CREATE TABLE IF NOT EXISTS ${tableName}(
@@ -12,22 +12,22 @@ const tableName="adjectives"
     await db.executeSql(query);
   };
  export const getAdj = async () => {
+   const promise=new Promise((resolve, reject) => {
     db.transaction(txn=>txn.executeSql(`SELECT * FROM  ${tableName}`,[],(sqlTxn,res)=>{
-        console.log("success")
-        let len = res.rows.length;
-
-          if (len > 0) {
-            let results = [];
-            for (let i = 0; i < len; i++) {
-              let item = res.rows.item(i);
-              results.push(item.value);
-            }
-            console.log(results)
-        }
+      let len = res.rows.length;
+        if (len > 0) {
+          let results = [];
+          for (let i = 0; i < len; i++) {
+            let item = res.rows.item(i);
+            results.push(item.value);
+          }
+          resolve(results)
+      }
     },error=>{
-        console.log("error",error)
+        reject(error)
     }))
-    
+  })
+  return promise
   };
   export const saveAdj = async (adj) => {
     db.transaction(txn=>{

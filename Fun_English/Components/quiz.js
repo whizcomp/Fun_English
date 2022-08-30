@@ -5,7 +5,7 @@ import Box from './Modelling/Box';
 import { useNavigation } from '@react-navigation/native'
 import Button from './Modelling/MyButton';
 
-const Quiz = ({quiz,word="",letters}) => {
+const Quiz = ({quiz,word="",letters,id}) => {
     useEffect(()=>{
         reset()
         wordArr.map(letter=>val.push(null));
@@ -26,10 +26,10 @@ const Quiz = ({quiz,word="",letters}) => {
     const checkAnswer=()=>{
         const insString=ins.join("");
         if(insString==word){
-            navigation.navigate('Check',{word,quiz}) 
+            navigation.navigate('Check',{word,quiz,id}) 
           }
         else{
-            navigation.navigate('Wrong',{word,quiz,ins}) 
+            navigation.navigate('Wrong',{word,quiz,ins,id}) 
         }    
     }
     const addToAnswer=(word)=>{

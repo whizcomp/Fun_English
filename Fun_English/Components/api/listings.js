@@ -1,4 +1,3 @@
 import apiClient from "./apisauce";
 
-const getListings=()=>apiClient.get("/api/adj/:list");
-export default {getListings}
+export const getListings=async(level,adj)=> await apiClient.get(`/${level}/${adj}`);

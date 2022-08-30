@@ -5,16 +5,17 @@ import Button from './Modelling/MyButton';
 import { useRoute,useNavigation } from '@react-navigation/native';
 import {IndexContext} from './context/indexContext';
 import { LevelContext } from './context/levelContext';
+import { saveAdj } from './api/localdb';
 
 const Check = () => {
     const {ind,setInd}=useContext(IndexContext)
    const {setCurrentLevel,currentLevel}=useContext(LevelContext)
     const route = useRoute();
     const navigation=useNavigation();
-    const { word, quiz} = route.params;
+    const { word, quiz,id} = route.params;
     const nextQuiz=()=>{
-         
-     if(ind==1){
+    saveAdj(id)
+    if(ind==10){
         setInd(0)
         setCurrentLevel(currentLevel+1)
         navigation.navigate("NavPage")
