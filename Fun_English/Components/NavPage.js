@@ -25,10 +25,11 @@ const NavPage = () =>{
         {title:"Level Five",number:5}
 ]
     const setLevel=(level)=>{
-        navigation.navigate("Assemble",{level})
+        
     }
     return (
     <Animated.View style={[styles.container,{opacity:fadeAnim}]}>
+        <Button  onPress={()=>navigation.navigate("NewWords")} title="Add Word"/>
         {levels.map(level=><Button disabled={level.number>currentLevel?true:false}key={level.number} onPress={()=>setLevel(level)} title={level.title} style={{opacity:level.number>currentLevel?0.3:1}}/>)}
     </Animated.View>
 )};

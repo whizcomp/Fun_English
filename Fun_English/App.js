@@ -7,13 +7,10 @@ import { IndexContext } from './Components/context/indexContext';
 import Wronged from './Components/wrong';
 import NavPage from './Components/NavPage';
 import { LevelContext } from './Components/context/levelContext';
-import {getAdj} from './Components/api/localdb';
-
+import AddWords from './Components/AddWords';
+import Toast from 'react-native-toast-message'
 const App = () =>{
   
-  const getSavedAdj=async()=>{
-    return await getAdj()
-  }
   const [ind,setInd]=useState(0);
   
   const [currentLevel,setCurrentLevel]=useState(1)
@@ -28,7 +25,9 @@ const App = () =>{
         <Stack.Screen name="Assemble" component={Assemble} />
         <Stack.Screen name="Check" component={Check} />
         <Stack.Screen name="Wrong" component={Wronged} />
+        <Stack.Screen name="NewWords" component={AddWords} />
       </Stack.Navigator>
+      <Toast/>
     </NavigationContainer>
     </LevelContext.Provider>
     </IndexContext.Provider>
