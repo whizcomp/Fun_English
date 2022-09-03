@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React,{useState} from 'react';
 import Check from './Components/check';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,6 +9,8 @@ import NavPage from './Components/NavPage';
 import { LevelContext } from './Components/context/levelContext';
 import AddWords from './Components/AddWords';
 import Toast from 'react-native-toast-message'
+import HomePage from './Components/HomePage';
+import { View } from 'react-native';
 const App = () =>{
   
   const [ind,setInd]=useState(0);
@@ -17,19 +19,24 @@ const App = () =>{
   const Stack = createNativeStackNavigator();
   
   return (
+    
     <IndexContext.Provider value={{ind,setInd}}>
     <LevelContext.Provider value={{currentLevel,setCurrentLevel}}>
-    <NavigationContainer>
+    
+      <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="NavPage" component={NavPage} />
+        <Stack.Screen name="HomePage" component={HomePage}/>
+        <Stack.Screen name="NavPage" component={NavPage} />
         <Stack.Screen name="Assemble" component={Assemble} />
         <Stack.Screen name="Check" component={Check} />
         <Stack.Screen name="Wrong" component={Wronged} />
         <Stack.Screen name="NewWords" component={AddWords} />
       </Stack.Navigator>
+      
       <Toast/>
     </NavigationContainer>
     </LevelContext.Provider>
     </IndexContext.Provider>
+    
     )}
 export default App;
