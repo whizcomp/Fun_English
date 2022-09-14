@@ -25,7 +25,7 @@ const Quiz = ({quiz,word="",letters,id}) => {
     const raw=letters.split("")
     const checkAnswer=()=>{
         const insString=ins.join("");
-        if(insString==word){
+        if(insString.toUpperCase()==word.toUpperCase()){
             navigation.navigate('Check',{word,quiz,id}) 
           }
         else{

@@ -6,9 +6,8 @@ import Button from './Modelling/MyButton';
 const HomePage = () => {
     const navigation=useNavigation()
     return(
-    <ImageBackground style={styles.bgStyle}source={require('../assets/background.png')}>
+    <ImageBackground style={styles.bgStyle}source={require('../assets/background.png')} blurRadius={3}>
         <View style={styles.container}>
-        
         <View style={styles.viewLogo}>
             <Image style={styles.logo} source={require('../assets/logo.png')}/>
         </View>

@@ -1,3 +1,5 @@
+import { useNavigation, useRoute } from '@react-navigation/native';
+import LottieView from 'lottie-react-native';
 import React,{useContext, useEffect, useState}from 'react';
 import {  View,StyleSheet,Text} from 'react-native';
 import {getListings}from '../api/listings';
@@ -8,7 +10,6 @@ import Quiz from '../quiz';
 const Assemble = () => {
   const getWords= async ()=>{
     try {
-      
       const {data}=await getListings(1, await getSavedAdj())
       console.log("data",data)
       getSavedAdj()
@@ -34,7 +35,8 @@ const Assemble = () => {
    const [errors,setErrors]=useState(false)
     return (
         <View style={styles.container}>
-            {errors?<View style={styles.loadingContainer}><Text style={styles.error}>Error</Text></View>:!loading?<Quiz quiz={words[ind].definition}  word={words[ind].word} letters={words[ind].letters} id={words[ind].id}/>:<View style={styles.loadingContainer}><Text>loading...</Text></View> }
+            {errors?<View style={styles.loadingContainer}><Text style={styles.error}>Error</Text></View>:!loading?<Quiz quiz={words[ind].definition}  word={words[ind].word} letters={words[ind].letters} id={words[ind].id}/>:<View style={styles.loadingContainer}>
+              <LottieView source={require('../../assets/loading.json')} style={styles.lottie} autoPlay/></View> }
             
         </View>
     )
@@ -51,6 +53,10 @@ const styles = StyleSheet.create({
      flex:1,
      justifyContent:"center",
      alignItems:"center" 
-    }
+    },
+    lottie:{
+      width:200,
+      height:300
+  },
   })
 export default Assemble;
