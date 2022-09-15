@@ -6,18 +6,23 @@ import { useRoute,useNavigation } from '@react-navigation/native';
 import {IndexContext} from './context/indexContext';
 import { LevelContext } from './context/levelContext';
 import { saveAdj } from './api/localdb';
-
+import { LimitContext } from './context/LimitContext';
+import colors from './config/colors';
 const Check = () => {
     const {ind,setInd}=useContext(IndexContext)
    const {setCurrentLevel,currentLevel}=useContext(LevelContext)
+   const {limitContext,setLimitContext}=useContext(LimitContext)
     const route = useRoute();
     const navigation=useNavigation();
     const { word, quiz,id} = route.params;
     const nextQuiz=()=>{
     saveAdj(id)
-    if(ind==10){
+    if(ind==3){
         setInd(0)
         setCurrentLevel(currentLevel+1)
+        if(currentLevel>=limitContext){
+           setLimitContext(limitContext+1) 
+        }
         navigation.navigate("NavPage")
     }else {
         setInd(ind+1);
@@ -53,7 +58,7 @@ const styles = StyleSheet.create({
     }, 
     word:{
         textTransform:"uppercase",
-        color:"#08B92E",
+        color:colors.primary,
         fontSize:34,
         paddingBottom:20
     }

@@ -4,6 +4,7 @@ import Text from '../MyText';
 import Box from './Modelling/Box';
 import { useNavigation } from '@react-navigation/native'
 import Button from './Modelling/MyButton';
+import colors from './config/colors';
 
 const Quiz = ({quiz,word="",letters,id}) => {
     useEffect(()=>{
@@ -60,7 +61,7 @@ const Quiz = ({quiz,word="",letters,id}) => {
 const styles = StyleSheet.create({
     ask:{
         paddingTop:"5%",
-        color:"#08B92E"
+        color:colors.primary
     },
     box:{
         width:"auto",
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
         height:35
     },
     clear:{
-        color:"red",
+        color:colors.red,
         fontSize:24,
         
     },

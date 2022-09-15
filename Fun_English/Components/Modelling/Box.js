@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View,StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import colors from '../config/colors';
 
 const Box = ({lttr,onPress,style}) => {
     
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
     cover:{
         width:40,
         height:40,
-        backgroundColor:"#08B92E",
+        backgroundColor:colors.primary,
         justifyContent:"center",
         alignItems:"center",
         margin:5,

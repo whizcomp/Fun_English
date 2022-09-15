@@ -6,11 +6,11 @@ import {getListings}from '../api/listings';
 import {  getAdj } from '../api/localdb';
 import {IndexContext }from '../context/indexContext';
 import Quiz from '../quiz';
-
+import colors from '../config/colors';
 const Assemble = () => {
   const getWords= async ()=>{
     try {
-      const {data}=await getListings(1, await getSavedAdj())
+      const {data}=await getListings(1,await getSavedAdj())
       console.log("data",data)
       getSavedAdj()
     setWords(data)
@@ -22,7 +22,9 @@ const Assemble = () => {
     }
   }
   const getSavedAdj=async()=>{
+    
     const list= await getAdj()
+    console.log("list",list)
     return list.toString()
    }
   useEffect(()=>{
@@ -37,17 +39,17 @@ const Assemble = () => {
         <View style={styles.container}>
             {errors?<View style={styles.loadingContainer}><Text style={styles.error}>Error</Text></View>:!loading?<Quiz quiz={words[ind].definition}  word={words[ind].word} letters={words[ind].letters} id={words[ind].id}/>:<View style={styles.loadingContainer}>
               <LottieView source={require('../../assets/loading.json')} style={styles.lottie} autoPlay/></View> }
-            
         </View>
     )
 }
 const styles = StyleSheet.create({
     container:{
       flex:1,
-      paddingHorizontal:10
+      paddingHorizontal:10,
+      backgroundColor:colors.black
     },
     error:{
-      color:'red'
+      color:colors.red
     },
     loadingContainer:{
      flex:1,

@@ -3,6 +3,8 @@ import { Animated, ScrollView, StyleSheet, View,ImageBackground,Text } from 'rea
 import { LevelContext } from './context/levelContext';
 import Button from './Modelling/MyButton';
 import { useNavigation } from '@react-navigation/native';
+import { LimitContext } from './context/LimitContext';
+import colors from './config/colors';
 const NavPage = () =>{
     useEffect(()=>{
         Animated.timing(fadeAnim,{
@@ -15,7 +17,10 @@ const NavPage = () =>{
     const fadeIn=()=>{
         
     }
-   const {currentLevel}=useContext(LevelContext)
+    
+   const {limitContext}=useContext(LimitContext)
+   const {currentLevel,setCurrentLevel}=useContext(LevelContext)
+
    const navigation=useNavigation()
    const levels=[
         {title:"Level One",number:1},
@@ -25,6 +30,8 @@ const NavPage = () =>{
         {title:"Level Five",number:5}
 ]
     const setLevel=(level)=>{
+        const {number}=level
+        setCurrentLevel(number)
         navigation.navigate("Assemble",{level})
     }
     return (
@@ -32,7 +39,7 @@ const NavPage = () =>{
     <View style={styles.cover}>
         <Animated.View style={[styles.container,{opacity:fadeAnim}]}>
             {/* <Button  onPress={()=>navigation.navigate("NewWords")} title="Add Word"/> */}
-            <ScrollView>{levels.map(level=><Button disabled={level.number>currentLevel?true:false}key={level.number} onPress={()=>setLevel(level)} title={level.title} style={{opacity:level.number>currentLevel?0.3:1}}/>)}</ScrollView>
+            <ScrollView>{levels.map(level=><Button disabled={level.number>limitContext?true:false}key={level.number} onPress={()=>setLevel(level)} title={level.title} style={{opacity:level.number>limitContext?0.3:1}}/>)}</ScrollView>
         </Animated.View>
         <View style={styles.wordDayView}>
             <Text style={styles.txt}>Word of the day</Text>
@@ -56,13 +63,13 @@ const styles = StyleSheet.create({
         paddingTop:"15%"
     },
     definition:{
-        color:"fff",
+        color:colors.white,
         fontSize:16,
         paddingTop:"10%"
     },
     line:{
         paddingTop:10,
-         borderBottomColor: 'black',
+         borderBottomColor: colors.black,
          borderBottomWidth: StyleSheet.hairlineWidth,
         
         },
@@ -81,7 +88,7 @@ const styles = StyleSheet.create({
     },
     wordDay:{
         fontSize:18,
-        color:"#000",
+        color:colors.black,
         textTransform:"uppercase",
         paddingTop:10,
         fontWeight:"bold",
@@ -89,7 +96,7 @@ const styles = StyleSheet.create({
     },
     wordDayView:{
         minHeight:"30%",
-        backgroundColor:"#fff",
+        backgroundColor:colors.white,
         margin:20,
         padding:15,
         elevation:5

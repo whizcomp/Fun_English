@@ -13,7 +13,7 @@ const Wronged = () =>{
     const { word, quiz,ins} = route.params;
     const nextQuiz=()=>{
          
-        if(ind==10){
+        if(ind==3){
            setInd(0)
            setCurrentLevel(currentLevel+1)
            navigation.navigate("NavPage")
