@@ -20,7 +20,7 @@ const Check = () => {
     if(ind+1==10){
         setInd(0)
         setCurrentLevel(currentLevel+1)
-        if(currentLevel>=limitContext){
+        if(currentLevel>=limitContext&&limitContext<5){
            setLimitContext(limitContext+1) 
         }
         navigation.navigate("NavPage")
