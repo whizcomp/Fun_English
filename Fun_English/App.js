@@ -14,14 +14,14 @@ import Toast from 'react-native-toast-message'
 import HomePage from './Components/HomePage';
 import { LimitContext } from './Components/context/LimitContext';
 import { createTable } from './Components/api/localdb';
-import { useColorScheme } from 'react-native';
 
 const App = () =>{
- useEffect(()=>{
-  setTheme(themeColor)
- },[themeColor])
- const themeColor=useColorScheme()
- const [theme,setTheme]=useState(null)
+  useEffect(()=>{
+    init()
+  },[])
+  const init=async()=>{
+    return await createTable()
+  }
   const [ind,setInd]=useState(0);
   const [limitContext,setLimitContext]=useState(1)
   const [currentLevel,setCurrentLevel]=useState(1)
@@ -33,7 +33,7 @@ const App = () =>{
     <IndexContext.Provider value={{ind,setInd}}>
     <LevelContext.Provider value={{currentLevel,setCurrentLevel}}>
     <LimitContext.Provider value={{limitContext,setLimitContext}}>
-      <ThemeContext.Provider value={{theme}}>
+      
       <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="HomePage" component={HomePage}/>
@@ -46,7 +46,6 @@ const App = () =>{
       
       <Toast/>
     </NavigationContainer>
-    </ThemeContext.Provider>
     </LimitContext.Provider>
     </LevelContext.Provider>
     

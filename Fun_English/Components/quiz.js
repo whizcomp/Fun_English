@@ -8,7 +8,8 @@ import colors from './config/colors';
 import ProgressBar from 'react-native-progress/Bar';
 import { LevelContext } from './context/levelContext';
 import { IndexContext } from './context/indexContext';
-
+import convert from"number-to-text"
+import 'number-to-text/converters/en-us';
 const screenWidth = Dimensions.get('screen').width*0.9;
 
 const Quiz = ({quiz,word="",letters,id}) => {
@@ -52,8 +53,8 @@ const Quiz = ({quiz,word="",letters,id}) => {
     
     return(
     <View style={{flex:1}}>
-      <Text>Level {currentLevel}</Text>
-      <View>
+      <Text>Level {convert.convertToText(currentLevel)}</Text>
+      <View style={styles.progress}>
       <ProgressBar progress={ind/10} width={screenWidth} height={10} color={colors.primary}/>
       </View>
       <Text style={styles.ask}>What word means:</Text>
@@ -100,6 +101,9 @@ const styles = StyleSheet.create({
         alignItems:"center",
         justifyContent:"center",
         alignContent:"center"
+    },
+    progress:{
+        paddingVertical:15
     },
     raw:{
         flex:1,
