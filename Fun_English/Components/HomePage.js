@@ -3,6 +3,7 @@ import React from 'react';
 import { View,StyleSheet,Image, ImageBackground } from 'react-native';
 import Button from './Modelling/MyButton';
 
+
 const HomePage = () => {
     const navigation=useNavigation()
     return(
@@ -11,6 +12,7 @@ const HomePage = () => {
         <View style={styles.viewLogo}>
             <Image style={styles.logo} source={require('../assets/logo.png')}/>
         </View>
+        
         <View style={styles.bottomNav}>
             <Button  title="Continue" onPress={()=>navigation.navigate('NavPage')}/>
         </View>

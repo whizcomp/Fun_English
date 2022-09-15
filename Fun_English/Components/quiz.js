@@ -1,10 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View,StyleSheet, TouchableWithoutFeedback} from 'react-native';
-import Text from '../MyText';
+import {Dimensions, View,StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import Text from './Modelling/MyText';
 import Box from './Modelling/Box';
 import { useNavigation } from '@react-navigation/native'
 import Button from './Modelling/MyButton';
 import colors from './config/colors';
+import ProgressBar from 'react-native-progress/Bar';
+import { LevelContext } from './context/levelContext';
+import { IndexContext } from './context/indexContext';
+
+const screenWidth = Dimensions.get('screen').width*0.9;
 
 const Quiz = ({quiz,word="",letters,id}) => {
     useEffect(()=>{
@@ -12,6 +17,9 @@ const Quiz = ({quiz,word="",letters,id}) => {
         wordArr.map(letter=>val.push(null));
         setIns(val)
     },[word])
+    const {currentLevel}=useContext(LevelContext)
+    const {ind}=useContext(IndexContext)
+
     const navigation=useNavigation()
     const wordArr=word.split("");
         let val=[]
@@ -44,7 +52,10 @@ const Quiz = ({quiz,word="",letters,id}) => {
     
     return(
     <View style={{flex:1}}>
-      <Text>Level one</Text>
+      <Text>Level {currentLevel}</Text>
+      <View>
+      <ProgressBar progress={ind/10} width={screenWidth} height={10} color={colors.primary}/>
+      </View>
       <Text style={styles.ask}>What word means:</Text>
       <Text style={styles.quiz}>{quiz}</Text>
       <View style={styles.lettersCover}>{ins.map((word,index)=><Box style={styles.box} lttr={word} key={index} />)}</View>
@@ -53,7 +64,6 @@ const Quiz = ({quiz,word="",letters,id}) => {
       </View>
       <View >
       <Button onPress={reset} title="Reset"style={{backgroundColor:"#8B0000"}}/>
-
         <Button onPress={checkAnswer} title="Check answer"/>
       </View>
     </View>

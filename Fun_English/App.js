@@ -7,26 +7,25 @@ import { IndexContext } from './Components/context/indexContext';
 import Wronged from './Components/wrong';
 import NavPage from './Components/NavPage';
 import { LevelContext } from './Components/context/levelContext';
+import { ThemeContext } from './Components/context/themeContext';
+
 import AddWords from './Components/AddWords';
 import Toast from 'react-native-toast-message'
 import HomePage from './Components/HomePage';
 import { LimitContext } from './Components/context/LimitContext';
 import { createTable } from './Components/api/localdb';
+import { useColorScheme } from 'react-native';
+
 const App = () =>{
-  useEffect(()=>{
-    creatingLocalDb()
-  },[])
-  const creatingLocalDb=async()=>{
-    console.log("creating table")
-    console.log("...........");
-    const res=await createTable();
-    console.log(res)
-    console.log("...........");
-    console.log("...........");
-  }
+ useEffect(()=>{
+  setTheme(themeColor)
+ },[themeColor])
+ const themeColor=useColorScheme()
+ const [theme,setTheme]=useState(null)
   const [ind,setInd]=useState(0);
   const [limitContext,setLimitContext]=useState(1)
   const [currentLevel,setCurrentLevel]=useState(1)
+
   const Stack = createNativeStackNavigator();
   
   return (
@@ -34,6 +33,7 @@ const App = () =>{
     <IndexContext.Provider value={{ind,setInd}}>
     <LevelContext.Provider value={{currentLevel,setCurrentLevel}}>
     <LimitContext.Provider value={{limitContext,setLimitContext}}>
+      <ThemeContext.Provider value={{theme}}>
       <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="HomePage" component={HomePage}/>
@@ -46,6 +46,7 @@ const App = () =>{
       
       <Toast/>
     </NavigationContainer>
+    </ThemeContext.Provider>
     </LimitContext.Provider>
     </LevelContext.Provider>
     

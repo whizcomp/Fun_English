@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     container:{
       flex:1,
       paddingHorizontal:10,
-      backgroundColor:colors.black
+      backgroundColor:colors.background
     },
     error:{
       color:colors.red

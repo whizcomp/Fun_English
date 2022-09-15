@@ -1,10 +1,12 @@
 import React,{useContext, useEffect, useRef} from 'react';
-import { Animated, ScrollView, StyleSheet, View,ImageBackground,Text } from 'react-native';
+import { Animated, ScrollView, StyleSheet, View,ImageBackground} from 'react-native';
 import { LevelContext } from './context/levelContext';
 import Button from './Modelling/MyButton';
 import { useNavigation } from '@react-navigation/native';
 import { LimitContext } from './context/LimitContext';
 import colors from './config/colors';
+import Text from './Modelling/MyText';
+
 const NavPage = () =>{
     useEffect(()=>{
         Animated.timing(fadeAnim,{
@@ -63,7 +65,6 @@ const styles = StyleSheet.create({
         paddingTop:"15%"
     },
     definition:{
-        color:colors.white,
         fontSize:16,
         paddingTop:"10%"
     },
@@ -87,12 +88,12 @@ const styles = StyleSheet.create({
         padding:10
     },
     wordDay:{
-        fontSize:18,
+        fontSize:20,
         color:colors.black,
         textTransform:"uppercase",
         paddingTop:10,
         fontWeight:"bold",
-        paddingBottom:15
+        paddingBottom:8
     },
     wordDayView:{
         minHeight:"30%",
