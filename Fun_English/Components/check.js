@@ -17,7 +17,7 @@ const Check = () => {
     const { word, quiz,id} = route.params;
     const nextQuiz=()=>{
     saveAdj(id)
-    if(ind==3){
+    if(ind+1==10){
         setInd(0)
         setCurrentLevel(currentLevel+1)
         if(currentLevel>=limitContext){

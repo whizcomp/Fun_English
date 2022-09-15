@@ -33,7 +33,7 @@ const tableName="words"
   };
   export const saveAdj = async (adj) => {
     db.transaction(txn=>{
-        txn.executeSql(`insert into ${tableName}(value) VALUES (?)`,[adj],(sqlTxn,res)=>{
+        txn.executeSql(`insert into ${tableName}(value) VALUES (?) where not exists( SELECT * FROM  ${tableName} where value=0)`,[adj],(sqlTxn,res)=>{
             console.log("added ",adj)
         },error=>{
             console.log("error",error)
