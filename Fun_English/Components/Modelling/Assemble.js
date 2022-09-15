@@ -11,7 +11,6 @@ const Assemble = () => {
   const getWords= async ()=>{
     try {
       const {data}=await getListings(1,await getSavedAdj())
-      console.log("data",data)
       getSavedAdj()
     setWords(data)
     setLoading(false)
@@ -24,7 +23,6 @@ const Assemble = () => {
   const getSavedAdj=async()=>{
     
     const list= await getAdj()
-    console.log("list",list)
     return list.toString()
    }
   useEffect(()=>{
