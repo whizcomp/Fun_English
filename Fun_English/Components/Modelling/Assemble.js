@@ -1,4 +1,3 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import React,{useContext, useEffect, useState}from 'react';
 import {  View,StyleSheet,Text} from 'react-native';

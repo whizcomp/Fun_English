@@ -10,6 +10,8 @@ import { LevelContext } from './context/levelContext';
 import { IndexContext } from './context/indexContext';
 import convert from"number-to-text"
 import 'number-to-text/converters/en-us';
+import Toast from 'react-native-toast-message';
+
 const screenWidth = Dimensions.get('screen').width*0.9;
 
 const Quiz = ({quiz,word="",letters,id}) => {
@@ -17,10 +19,20 @@ const Quiz = ({quiz,word="",letters,id}) => {
         reset()
         wordArr.map(letter=>val.push(null));
         setIns(val)
+        tip()
     },[word])
     const {currentLevel}=useContext(LevelContext)
     const {ind}=useContext(IndexContext)
-
+    const tip=()=>{
+        if(ind<5){
+            Toast.show({
+                type: 'success',
+                text1: 'Tip',
+                text2: `The first and last letters match the puzzle`,
+                visibilityTime:10000
+              });
+        }
+    }
     const navigation=useNavigation()
     const wordArr=word.split("");
         let val=[]

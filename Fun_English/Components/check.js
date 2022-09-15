@@ -1,5 +1,5 @@
 import React,{useContext} from 'react';
-import { Text, View,StyleSheet } from 'react-native';
+import {  View,StyleSheet } from 'react-native';
 import LottieView from 'lottie-react-native'
 import Button from './Modelling/MyButton';
 import { useRoute,useNavigation } from '@react-navigation/native';
@@ -8,6 +8,8 @@ import { LevelContext } from './context/levelContext';
 import { saveAdj } from './api/localdb';
 import { LimitContext } from './context/LimitContext';
 import colors from './config/colors';
+import Text from './Modelling/MyText';
+
 const Check = () => {
     const {ind,setInd}=useContext(IndexContext)
    const {setCurrentLevel,currentLevel}=useContext(LevelContext)

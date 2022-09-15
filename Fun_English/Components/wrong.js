@@ -1,9 +1,10 @@
 import React,{useContext} from 'react';
-import { Text, View,StyleSheet } from 'react-native';
+import { View,StyleSheet } from 'react-native';
 import Button from './Modelling/MyButton';
 import { useRoute,useNavigation } from '@react-navigation/native';
 import {IndexContext} from './context/indexContext';
 import { LevelContext } from './context/levelContext';
+import Text from './Modelling/MyText';
 
 const Wronged = () =>{ 
     const {ind,setInd}=useContext(IndexContext)
@@ -40,6 +41,10 @@ const Wronged = () =>{
             <View style={styles.btnEdit}>
                 <Button onPress={nextQuiz} title="Next"/>
             </View>
+            <View>
+                <Text style={styles.tip}>Free tip</Text>
+                <Text>The first and last letters of every letter</Text>
+            </View>
         </View>
     )};
 const styles = StyleSheet.create({
@@ -67,6 +72,9 @@ const styles = StyleSheet.create({
     color:"green",
     paddingVertical:"5%",
     textTransform:"uppercase"
+   },
+   tip:{
+    fontSize:18
    },
    wrongAnswer:{
     textAlign:"center",
