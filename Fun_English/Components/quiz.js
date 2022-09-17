@@ -24,7 +24,7 @@ const Quiz = ({quiz,word="",letters,id}) => {
     const {currentLevel}=useContext(LevelContext)
     const {ind}=useContext(IndexContext)
     const tip=()=>{
-        if(ind<5){
+        if(ind==1){
             Toast.show({
                 type: 'success',
                 text1: 'Tip',

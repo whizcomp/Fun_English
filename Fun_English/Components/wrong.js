@@ -41,10 +41,6 @@ const Wronged = () =>{
             <View style={styles.btnEdit}>
                 <Button onPress={nextQuiz} title="Next"/>
             </View>
-            <View>
-                <Text style={styles.tip}>Free tip</Text>
-                <Text>The first and last letters of every letter</Text>
-            </View>
         </View>
     )};
 const styles = StyleSheet.create({

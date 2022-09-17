@@ -27,7 +27,6 @@ const NavPage = () =>{
     }
     const getWordOfday=async()=>{
         const {data}=await getWord();
-        console.log(data)
         setLoading(false)
         setVocab(data[0])
         
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
         paddingTop:"15%"
     },
     definition:{
-        fontSize:16,
+        fontSize:18,
         paddingTop:"10%"
     },
     line:{
