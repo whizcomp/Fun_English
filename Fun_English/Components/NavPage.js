@@ -1,4 +1,4 @@
-import React,{useContext, useEffect, useRef} from 'react';
+import React,{useContext, useEffect, useRef,useState} from 'react';
 import { Animated, ScrollView, StyleSheet, View,ImageBackground} from 'react-native';
 import { LevelContext } from './context/levelContext';
 import Button from './Modelling/MyButton';
@@ -6,23 +6,36 @@ import { useNavigation } from '@react-navigation/native';
 import { LimitContext } from './context/LimitContext';
 import colors from './config/colors';
 import Text from './Modelling/MyText';
+import { getWord } from './api/listings';
+import LottieView from 'lottie-react-native';
 
 const NavPage = () =>{
     useEffect(()=>{
+      getWordOfday();
+    },[])
+    useEffect(()=>{
+        
         Animated.timing(fadeAnim,{
             toValue:1,
             duration:2000,
             useNativeDriver:true
         }).start()
-    })
+    },[])
     const fadeAnim=useRef(new Animated.Value(0)).current;
     const fadeIn=()=>{
         
     }
-    
+    const getWordOfday=async()=>{
+        const {data}=await getWord();
+        console.log(data)
+        setLoading(false)
+        setVocab(data[0])
+        
+    }
    const {limitContext}=useContext(LimitContext)
    const {currentLevel,setCurrentLevel}=useContext(LevelContext)
-
+    const [loading,setLoading]=useState(true)
+    const [vocab,setVocab]=useState([])
    const navigation=useNavigation()
    const levels=[
         {title:"Level One",number:1},
@@ -44,10 +57,11 @@ const NavPage = () =>{
             <ScrollView>{levels.map(level=><Button disabled={level.number>limitContext?true:false}key={level.number} onPress={()=>setLevel(level)} title={level.title} style={{opacity:level.number>limitContext?0.3:1}}/>)}</ScrollView>
         </Animated.View>
         <View style={styles.wordDayView}>
-            <Text style={styles.txt}>Word of the day</Text>
+           {!loading?<><Text style={styles.txt}>Word of the day</Text>
             <View style={styles.line} />
-            <Text style={styles.wordDay}>impeccable</Text>
-            <Text style={styles.definition}>Graceful and attractive in appearance or behaviour</Text>
+            <Text style={styles.wordDay}>{vocab.word}</Text>
+            <Text style={styles.definition}>{vocab.description}</Text></>:<View style={styles.loadingContainer}>
+              <LottieView source={require('../assets/loading.json')} style={styles.lottie} autoPlay/></View>}
         </View>
     </View>
     </ImageBackground>
@@ -74,6 +88,11 @@ const styles = StyleSheet.create({
          borderBottomWidth: StyleSheet.hairlineWidth,
         
         },
+        loadingContainer:{
+            flex:1,
+            justifyContent:"center",
+            alignItems:"center" 
+           },
     logo:{
         width:150,
         height:200
