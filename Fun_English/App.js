@@ -14,12 +14,15 @@ import Toast from 'react-native-toast-message'
 import HomePage from './Components/HomePage';
 import { LimitContext } from './Components/context/LimitContext';
 import { createTable } from './Components/api/localdb';
+import {  LocalNotificationSchedule,CancelNotification} from './Components/services';
 
 const App = () =>{
   useEffect(()=>{
     init()
   },[])
   const init=async()=>{
+    CancelNotification()
+    LocalNotificationSchedule()
     return await createTable()
   }
   const [ind,setInd]=useState(0);
