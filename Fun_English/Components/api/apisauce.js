@@ -1,4 +1,5 @@
 import {create} from "apisauce"
-const apiClient = create({baseURL:"https://adjectives.kipkoechdev.com/api/adj"})
+import {BASEURL} from "@env"
+const apiClient = create({baseURL:`${BASEURL}`})
 
 export default apiClient;

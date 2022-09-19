@@ -16,6 +16,8 @@ import { LimitContext } from './Components/context/LimitContext';
 import { createTable } from './Components/api/localdb';
 import {  LocalNotificationSchedule,CancelNotification} from './Components/services';
 
+
+
 const App = () =>{
   useEffect(()=>{
     init()
@@ -25,6 +27,9 @@ const App = () =>{
     LocalNotificationSchedule()
     return await createTable()
   }
+  
+
+
   const [ind,setInd]=useState(0);
   const [limitContext,setLimitContext]=useState(1)
   const [currentLevel,setCurrentLevel]=useState(1)

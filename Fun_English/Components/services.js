@@ -49,7 +49,7 @@ export const LocalNotificationSchedule = () => {
       'Learn English new Word to day',
     subText: 'New Word',
     title: 'Fun',
-    message: 'Click to learn a new word',
+    message: 'The word of the day is...',
     bigPictureUrl: "https://www.example.tld/picture.jpg", // (optional) default: undefined
   bigLargeIcon: "ic_launcher", // (optional) default: undefined
   bigLargeIconUrl: "https://www.example.tld/bigicon.jpg", 

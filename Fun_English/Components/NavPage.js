@@ -1,5 +1,5 @@
 import React,{useContext, useEffect, useRef,useState} from 'react';
-import { Animated, ScrollView, StyleSheet, View,ImageBackground} from 'react-native';
+import { Animated, ScrollView, StyleSheet, View,ImageBackground, TouchableWithoutFeedback} from 'react-native';
 import { LevelContext } from './context/levelContext';
 import Button from './Modelling/MyButton';
 import { useNavigation } from '@react-navigation/native';
@@ -12,7 +12,7 @@ import LottieView from 'lottie-react-native';
 const NavPage = () =>{
     useEffect(()=>{
       getWordOfday();
-    },[])
+    },[vocab])
     useEffect(()=>{
         
         Animated.timing(fadeAnim,{
@@ -26,14 +26,22 @@ const NavPage = () =>{
         
     }
     const getWordOfday=async()=>{
-        const {data}=await getWord();
+        setLoading(true)
+        const {data,ok}=await getWord();
+        if(ok){
         setLoading(false)
         setVocab(data[0])
+        }else{
+            setLoading(false) 
+            setError(true) 
+        }
+        
         
     }
    const {limitContext}=useContext(LimitContext)
    const {currentLevel,setCurrentLevel}=useContext(LevelContext)
-    const [loading,setLoading]=useState(true)
+    const [loading,setLoading]=useState(false)
+    const [error,setError]=useState(false)
     const [vocab,setVocab]=useState([])
    const navigation=useNavigation()
    const levels=[
@@ -55,13 +63,20 @@ const NavPage = () =>{
             {/* <Button  onPress={()=>navigation.navigate("NewWords")} title="Add Word"/> */}
             <ScrollView>{levels.map(level=><Button disabled={level.number>limitContext?true:false}key={level.number} onPress={()=>setLevel(level)} title={level.title} style={{opacity:level.number>limitContext?0.3:1}}/>)}</ScrollView>
         </Animated.View>
-        <View style={styles.wordDayView}>
+        {!error?<View style={styles.wordDayView}>
            {!loading?<><Text style={styles.txt}>Word of the day</Text>
             <View style={styles.line} />
             <Text style={styles.wordDay}>{vocab.word}</Text>
             <Text style={styles.definition}>{vocab.description}</Text></>:<View style={styles.loadingContainer}>
               <LottieView source={require('../assets/loading.json')} style={styles.lottie} autoPlay/></View>}
-        </View>
+        </View>:<View style={styles.wordDayView}>
+            <View style={styles.lottieView}><LottieView style={styles.lottie} source={require('./assets/12821-failed-attempt.json')} autoPlay/></View>
+            <TouchableWithoutFeedback  onPress={()=>getWordOfday()}>
+            <View style={styles.containerRetry}>
+                <Text style={styles.retry}>Retry</Text>
+            </View>
+            </TouchableWithoutFeedback>
+        </View> }
     </View>
     </ImageBackground>
 )};
@@ -72,6 +87,10 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         paddingHorizontal:19,
+    },
+    containerRetry:{
+        alignItems:"center",
+        paddingBottom:3
     },
     cover:{
         flex:1,
@@ -95,6 +114,23 @@ const styles = StyleSheet.create({
     logo:{
         width:150,
         height:200
+    },
+    lottie:{
+        width:200,
+        height:200,
+    },
+    lottieView:{
+        flex:1,
+        justifyContent:"center",
+        alignItems:"center",
+        overflow:"hidden"
+    },
+    retry:{
+        color:colors.white,
+        textTransform:"uppercase",
+        backgroundColor:colors.primary,
+        paddingHorizontal:10,
+        paddingVertical:5
     },
     txt:{
         fontSize:18
