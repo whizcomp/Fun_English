@@ -15,6 +15,7 @@ import HomePage from './Components/HomePage';
 import { LimitContext } from './Components/context/LimitContext';
 import { createTable } from './Components/api/localdb';
 import {  LocalNotificationSchedule,CancelNotification} from './Components/services';
+import { storeData,getData } from './Components/api/localstorage';
 
 
 
@@ -23,13 +24,23 @@ const App = () =>{
     init()
   },[])
   const init=async()=>{
-    CancelNotification()
-    LocalNotificationSchedule()
+    checkNotification()
     return await createTable()
   }
+  const checkNotification=async()=>{
+    const res=await getData();
+    if(res==null){
+      console.log('no notification')
+      CancelNotification()
+      LocalNotificationSchedule()
+    }
+    else{
+      console.log('notification enabled')
+      await storeData('notification enabled')
+    }
+  }
+
   
-
-
   const [ind,setInd]=useState(0);
   const [limitContext,setLimitContext]=useState(1)
   const [currentLevel,setCurrentLevel]=useState(1)

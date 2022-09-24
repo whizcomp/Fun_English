@@ -46,7 +46,7 @@ export const LocalNotificationSchedule = () => {
     autoCancel: true,
     date: new Date(Date.now() + 240 * 1000),
     bigText:
-      'Learn English new Word to day',
+      'Click to view the word of the day',
     subText: 'New Word',
     title: 'Fun',
     message: 'The word of the day is...',
